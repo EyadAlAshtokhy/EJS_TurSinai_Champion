@@ -289,7 +289,9 @@ footer {
     <div id="videos-list">جاري تحميل الفيديوهات...</div>
 </section>
 
-<p id="status" class="status">جاري الاتصال ببيانات الدوري...</p>
+<p id="status" class="status">
+    جاري الاتصال ببيانات الدوري...
+</p>
 
 </div>
 
@@ -317,6 +319,16 @@ async function loadLeague() {
 
         const data = await response.json();
 
+        // التحقق من البيانات
+
+        if (
+            !Array.isArray(data.teams) ||
+            !Array.isArray(data.matches) ||
+            !Array.isArray(data.videos)
+        ) {
+            throw new Error("تنسيق ملف البيانات غير صحيح");
+        }
+
         // الفرق
 
         document.getElementById("teams-list").innerHTML =
@@ -341,7 +353,7 @@ async function loadLeague() {
                 </div>
             `).join("");
 
-        // الترتيب
+        // إنشاء جدول الترتيب
 
         const standings = data.teams.map(team => ({
             name: team.name,
@@ -354,12 +366,16 @@ async function loadLeague() {
             points: 0
         }));
 
+        // المباريات التي تم تسجيل نتائجها
+
         const playedMatches = data.matches.filter(match =>
             Number.isInteger(match.homeScore) &&
             Number.isInteger(match.awayScore) &&
             match.homeScore >= 0 &&
             match.awayScore >= 0
         );
+
+        // حساب النقاط والأهداف
 
         playedMatches.forEach(match => {
 
@@ -393,11 +409,15 @@ async function loadLeague() {
 
                 home.drawn++;
                 away.drawn++;
+
                 home.points++;
                 away.points++;
 
             }
+
         });
+
+        // ترتيب الفرق
 
         standings.sort((a, b) =>
             b.points - a.points ||
@@ -405,6 +425,8 @@ async function loadLeague() {
             (a.goalsFor - a.goalsAgainst) ||
             b.goalsFor - a.goalsFor
         );
+
+        // عرض جدول الترتيب
 
         document.getElementById("standings-list").innerHTML = `
             <div class="table-wrapper">
@@ -437,7 +459,7 @@ async function loadLeague() {
             </div>
         `;
 
-        // التاريخ
+        // تنسيق التاريخ
 
         function formatDate(date) {
 
@@ -453,7 +475,7 @@ async function loadLeague() {
 
         }
 
-        // النتائج
+        // عرض النتائج
 
         document.getElementById("results-list").innerHTML =
             playedMatches.length
@@ -486,10 +508,11 @@ async function loadLeague() {
             `).join("")
             : "<p>انتهت جميع المباريات المسجلة.</p>";
 
-        // الفيديوهات
+        // عرض الفيديوهات
 
         document.getElementById("videos-list").innerHTML =
-            data.videos.map((video, index) => `
+            data.videos.length
+            ? data.videos.map((video, index) => `
                 <div class="video-card">
                     <h3>المباراة ${index + 1}</h3>
                     <video controls preload="metadata">
@@ -497,16 +520,23 @@ async function loadLeague() {
                         المتصفح لا يدعم تشغيل الفيديو.
                     </video>
                 </div>
-            `).join("");
+            `).join("")
+            : "<p>لا توجد فيديوهات مضافة حتى الآن.</p>";
 
-        status.textContent = "✅"يتم تغيير النتائج خلال ايام الدوري     "تابعونا";
+        // رسالة حالة الموقع
+
+        status.textContent =
+            "✅ يتم تغيير النتائج خلال أيام الدوري، تابعونا";
 
     } catch (error) {
 
         console.error(error);
 
-       status.textContent = "✅ يتم تغيير النتائج خلال أيام الدوري، تابعونا";
+        status.textContent =
+            "⚠️ تعذر تحميل البيانات. تأكد من رفع data.json إلى GitHub.";
+
     }
+
 }
 
 loadLeague();
