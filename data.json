@@ -1,0 +1,63 @@
+
+{
+  "teams": [
+    {
+      "name": "PREP-1",
+      "players": [
+        "محمد زكريا",
+        "مالك محمود",
+        "عمر أسامة",
+        "عدي عماد",
+        "مجد ناصر"
+      ]
+    },
+    {
+      "name": "PREP-2",
+      "players": [
+        "حميد ناصر",
+        "عبدالعزيز أحمد",
+        "صلاح الدين أحمد",
+        "مالك أحمد",
+        "كريم أحمد"
+      ]
+    },
+    {
+      "name": "PREP-3",
+      "players": [
+        "إياد عمرو",
+        "عبدالرحمن سامح",
+        "أحمد محمود",
+        "محمد أحمد عبدالعزيز",
+        "أسر الطاهر"
+      ]
+    }
+  ],
+  "matches": [
+    {
+      "date": "2026-11-08",
+      "home": "PREP-1",
+      "away": "PREP-2",
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "date": "2026-11-09",
+      "home": "PREP-2",
+      "away": "PREP-3",
+      "homeScore": null,
+      "awayScore": null
+    },
+    {
+      "date": "2026-11-10",
+      "home": "PREP-3",
+      "away": "PREP-1",
+      "homeScore": null,
+      "awayScore": null
+    }
+  ],
+  "videos": [
+    "videos/match1.mp4",
+    "videos/match2.mp4",
+    "videos/match3.mp4"
+  ]
+}

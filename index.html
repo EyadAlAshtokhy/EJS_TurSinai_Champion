@@ -1,0 +1,518 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EJS School League | دوري الفصول</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Tahoma, Arial, sans-serif;
+    background: #101827;
+    color: white;
+    line-height: 1.8;
+}
+
+header {
+    background: #17243a;
+    text-align: center;
+    padding: 35px 15px;
+    border-bottom: 4px solid #e8b94e;
+}
+
+header h1 {
+    color: #e8b94e;
+    font-size: 32px;
+}
+
+header p {
+    color: #d5dce8;
+    margin-top: 8px;
+}
+
+nav {
+    background: #1c2b43;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav a {
+    background: #263a58;
+    color: white;
+    text-decoration: none;
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+nav a:hover {
+    background: #e8b94e;
+    color: #101827;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+}
+
+.section {
+    background: #1c2b43;
+    padding: 25px;
+    margin: 25px 0;
+    border-radius: 14px;
+    scroll-margin-top: 85px;
+}
+
+.section h2 {
+    color: #e8b94e;
+    margin-bottom: 18px;
+    border-bottom: 1px solid #40516b;
+    padding-bottom: 10px;
+}
+
+.hero {
+    text-align: center;
+    padding: 50px 20px;
+    background: linear-gradient(135deg, #1c2b43, #263a58);
+}
+
+.hero h2 {
+    font-size: 30px;
+    color: #e8b94e;
+}
+
+.hero p {
+    margin-top: 12px;
+}
+
+.team {
+    background: #263a58;
+    padding: 18px;
+    margin: 12px 0;
+    border-radius: 10px;
+}
+
+.team h3 {
+    color: #e8b94e;
+    margin-bottom: 8px;
+}
+
+.team ol {
+    padding-right: 25px;
+}
+
+.team li {
+    padding: 3px 0;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    min-width: 500px;
+    border-collapse: collapse;
+    margin-top: 15px;
+    text-align: center;
+}
+
+th, td {
+    border: 1px solid #40516b;
+    padding: 12px 8px;
+}
+
+th {
+    background: #263a58;
+    color: #e8b94e;
+}
+
+tr:nth-child(even) {
+    background: #22334c;
+}
+
+.match {
+    background: #263a58;
+    padding: 18px;
+    margin: 15px 0;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.match h3 {
+    color: #e8b94e;
+}
+
+.teams {
+    font-size: 21px;
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+.video-card {
+    background: #263a58;
+    padding: 15px;
+    margin: 18px 0;
+    border-radius: 10px;
+}
+
+.video-card h3 {
+    color: #e8b94e;
+}
+
+video {
+    width: 100%;
+    max-height: 450px;
+    border-radius: 8px;
+    margin-top: 10px;
+    background: black;
+}
+
+.note {
+    color: #b9c6d8;
+    font-size: 14px;
+}
+
+.status {
+    text-align: center;
+    color: #e8b94e;
+    padding: 10px;
+}
+
+footer {
+    background: #17243a;
+    text-align: center;
+    padding: 25px;
+    color: #b9c6d8;
+    border-top: 3px solid #e8b94e;
+}
+
+@media(max-width:600px) {
+    header h1 {
+        font-size: 24px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    .section {
+        padding: 15px;
+    }
+
+    nav a {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 8px 4px;
+        font-size: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🏆 EJS SCHOOL LEAGUE</h1>
+    <p>المدارس المصرية اليابانية - طور سيناء</p>
+    <p>الدوري الرياضي للفصول 2026 / 2027</p>
+</header>
+
+<nav>
+    <a href="#home">الرئيسية</a>
+    <a href="#teams">الفرق</a>
+    <a href="#players">اللاعبون</a>
+    <a href="#standings">الترتيب</a>
+    <a href="#matches">النتائج</a>
+    <a href="#upcoming">المباريات القادمة</a>
+    <a href="#videos">الفيديوهات</a>
+</nav>
+
+<div class="container">
+
+<section id="home" class="section hero">
+    <h2>🏆 مرحباً بكم في دوري الفصول</h2>
+    <p>تابعوا منافسات دوري المدرسة ونتائج المباريات وترتيب الفرق وأبرز لحظات البطولة.</p>
+    <p>موسم 2026 / 2027</p>
+</section>
+
+<section id="teams" class="section">
+    <h2>⚽ الفرق المشاركة</h2>
+    <div id="teams-list">جاري تحميل الفرق...</div>
+</section>
+
+<section id="players" class="section">
+    <h2>👥 قائمة اللاعبين</h2>
+    <div id="players-list">جاري تحميل اللاعبين...</div>
+</section>
+
+<section id="standings" class="section">
+    <h2>📊 جدول ترتيب الدوري</h2>
+    <div id="standings-list">جاري تحميل الترتيب...</div>
+</section>
+
+<section id="matches" class="section">
+    <h2>🥅 نتائج المباريات</h2>
+    <div id="results-list">جاري تحميل النتائج...</div>
+</section>
+
+<section id="upcoming" class="section">
+    <h2>📅 المباريات القادمة</h2>
+    <div id="upcoming-list">جاري تحميل المباريات...</div>
+</section>
+
+<section id="videos" class="section">
+    <h2>🎥 فيديوهات المباريات</h2>
+    <div id="videos-list">جاري تحميل الفيديوهات...</div>
+</section>
+
+<p id="status" class="status">جاري الاتصال ببيانات الدوري...</p>
+
+</div>
+
+<footer>
+    <p>EJS TUR-SINAI</p>
+    <p>School League 2026 / 2027</p>
+    <p>© جميع الحقوق محفوظة</p>
+</footer>
+
+<script>
+
+async function loadLeague() {
+
+    const status = document.getElementById("status");
+
+    try {
+
+        const response = await fetch("./data.json", {
+            cache: "no-store"
+        });
+
+        if (!response.ok) {
+            throw new Error("لم يتم العثور على ملف البيانات");
+        }
+
+        const data = await response.json();
+
+        // الفرق
+
+        document.getElementById("teams-list").innerHTML =
+            data.teams.map(team => `
+                <div class="team">
+                    <h3>⚽ ${team.name}</h3>
+                    <p>عدد اللاعبين: ${team.players.length}</p>
+                </div>
+            `).join("");
+
+        // اللاعبين
+
+        document.getElementById("players-list").innerHTML =
+            data.teams.map(team => `
+                <div class="team">
+                    <h3>${team.name}</h3>
+                    <ol>
+                        ${team.players.map(player =>
+                            `<li>${player}</li>`
+                        ).join("")}
+                    </ol>
+                </div>
+            `).join("");
+
+        // الترتيب
+
+        const standings = data.teams.map(team => ({
+            name: team.name,
+            played: 0,
+            won: 0,
+            drawn: 0,
+            lost: 0,
+            goalsFor: 0,
+            goalsAgainst: 0,
+            points: 0
+        }));
+
+        const playedMatches = data.matches.filter(match =>
+            Number.isInteger(match.homeScore) &&
+            Number.isInteger(match.awayScore) &&
+            match.homeScore >= 0 &&
+            match.awayScore >= 0
+        );
+
+        playedMatches.forEach(match => {
+
+            const home = standings.find(t => t.name === match.home);
+            const away = standings.find(t => t.name === match.away);
+
+            if (!home || !away) return;
+
+            home.played++;
+            away.played++;
+
+            home.goalsFor += match.homeScore;
+            home.goalsAgainst += match.awayScore;
+
+            away.goalsFor += match.awayScore;
+            away.goalsAgainst += match.homeScore;
+
+            if (match.homeScore > match.awayScore) {
+
+                home.won++;
+                away.lost++;
+                home.points += 3;
+
+            } else if (match.homeScore < match.awayScore) {
+
+                away.won++;
+                home.lost++;
+                away.points += 3;
+
+            } else {
+
+                home.drawn++;
+                away.drawn++;
+                home.points++;
+                away.points++;
+
+            }
+        });
+
+        standings.sort((a, b) =>
+            b.points - a.points ||
+            (b.goalsFor - b.goalsAgainst) -
+            (a.goalsFor - a.goalsAgainst) ||
+            b.goalsFor - a.goalsFor
+        );
+
+        document.getElementById("standings-list").innerHTML = `
+            <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>المركز</th>
+                        <th>الفريق</th>
+                        <th>لعب</th>
+                        <th>فاز</th>
+                        <th>تعادل</th>
+                        <th>خسر</th>
+                        <th>النقاط</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${standings.map((team, index) => `
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td>${team.name}</td>
+                            <td>${team.played}</td>
+                            <td>${team.won}</td>
+                            <td>${team.drawn}</td>
+                            <td>${team.lost}</td>
+                            <td>${team.points}</td>
+                        </tr>
+                    `).join("")}
+                </tbody>
+            </table>
+            </div>
+        `;
+
+        // التاريخ
+
+        function formatDate(date) {
+
+            return new Date(date + "T12:00:00").toLocaleDateString(
+                "ar-EG",
+                {
+                    weekday: "long",
+                    day: "numeric",
+                    month: "numeric",
+                    year: "numeric"
+                }
+            );
+
+        }
+
+        // النتائج
+
+        document.getElementById("results-list").innerHTML =
+            playedMatches.length
+            ? playedMatches.map(match => `
+                <div class="match">
+                    <h3>${formatDate(match.date)}</h3>
+                    <div class="teams">
+                        ${match.home} ${match.homeScore}
+                        - ${match.awayScore} ${match.away}
+                    </div>
+                </div>
+            `).join("")
+            : "<p>لم يتم تسجيل أي نتائج حتى الآن.</p>";
+
+        // المباريات القادمة
+
+        const upcoming = data.matches.filter(match =>
+            !playedMatches.includes(match)
+        );
+
+        document.getElementById("upcoming-list").innerHTML =
+            upcoming.length
+            ? upcoming.map(match => `
+                <div class="match">
+                    <h3>${formatDate(match.date)}</h3>
+                    <div class="teams">
+                        ${match.home} × ${match.away}
+                    </div>
+                </div>
+            `).join("")
+            : "<p>انتهت جميع المباريات المسجلة.</p>";
+
+        // الفيديوهات
+
+        document.getElementById("videos-list").innerHTML =
+            data.videos.map((video, index) => `
+                <div class="video-card">
+                    <h3>المباراة ${index + 1}</h3>
+                    <video controls preload="metadata">
+                        <source src="${video}" type="video/mp4">
+                        المتصفح لا يدعم تشغيل الفيديو.
+                    </video>
+                </div>
+            `).join("");
+
+        status.textContent = "✅ تم تحميل بيانات الدوري بنجاح";
+
+    } catch (error) {
+
+        console.error(error);
+
+        status.textContent = "⚠️ تعذر تحميل البيانات. تأكد من رفع data.json إلى GitHub.";
+
+    }
+}
+
+loadLeague();
+
+</script>
+
+</body>
+</html>
